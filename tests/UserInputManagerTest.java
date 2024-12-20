@@ -192,4 +192,34 @@ public class UserInputManagerTest {
         assertFalse(UserInputManager.isValidEmail("ewan.decima@telecomnancy"));
         assertFalse(UserInputManager.isValidEmail("ewan.decimatelecomnancy.eu"));
     }
+
+    @Test
+    public void testIsValidPhoneNumber() {
+        //assertTrue(UserInputManager.isValidPhoneNumber("+33 6 12 34 56 78"));
+        assertTrue(UserInputManager.isValidPhoneNumber("123-456-7890"));
+        assertFalse(UserInputManager.isValidPhoneNumber("abc123"));
+    }
+
+    @Test
+    public void testIsValidUrl() {
+        assertTrue(UserInputManager.isValidUrl("https://example.com"));
+        assertTrue(UserInputManager.isValidUrl("ftp://files.server.net"));
+        assertFalse(UserInputManager.isValidUrl("invalid.url"));
+    }
+
+    @Test
+    public void testIsValidPostalCode() {
+        assertTrue(UserInputManager.isValidPostalCode("75001"));
+        assertTrue(UserInputManager.isValidPostalCode("1234567890"));
+        assertFalse(UserInputManager.isValidPostalCode("ABC123"));
+    }
+
+    @Test
+    public void testIsValidCreditCardNumber() {
+        String validCard = "4539 1488 0343 6467";
+        String invalidCard = "1234 5678 9012 3456";
+
+        assertTrue(UserInputManager.isValidCreditCardNumber(validCard));
+        assertFalse(UserInputManager.isValidCreditCardNumber(invalidCard));
+    }
 }

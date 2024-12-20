@@ -305,6 +305,102 @@ public final class UserInputManager {
     }
 
 
+    /**
+     * Vérifie si une chaîne représente un numéro de téléphone valide.
+     *
+     * @param input La chaîne à vérifier.
+     * @return true si la chaîne représente un numéro de téléphone valide, false sinon.
+     */
+    public static boolean isValidPhoneNumber(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false;
+        }
+        // Ex: Format 10 chiffres, autorise espaces, tirets ou parenthèses.
+        String phoneRegex = "^\\+?[0-9 .()-]{7,15}$";
+        return input.trim().matches(phoneRegex);
+    }
+
+
+    /**
+     * Vérifie si une chaîne représente une URL valide.
+     *
+     * @param input La chaîne à vérifier.
+     * @return true si la chaîne représente une URL valide, false sinon.
+     */
+    public static boolean isValidUrl(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false;
+        }
+        // Validation basique d'URL
+        String urlRegex = "^(https?|ftp)://[\\w.-]+(?:\\.[\\w.-]+)+[/\\w\\d#?&=.-]*$";
+        return input.trim().matches(urlRegex);
+    }
+
+
+    /**
+     * Vérifie si une chaîne représente un code postal valide.
+     *
+     * @param input La chaîne à vérifier.
+     * @return true si la chaîne représente un code postal valide, false sinon.
+     */
+    public static boolean isValidPostalCode(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false;
+        }
+        // Exemple : 5 chiffres pour un code postal générique
+        String postalCodeRegex = "^[0-9]{5,10}$";
+        return input.trim().matches(postalCodeRegex);
+    }
+
+
+    /**
+     * Vérifie si un numéro de carte de crédit est valide en utilisant l'algorithme de Luhn.
+     *
+     * @param input Le numéro de carte de crédit à vérifier.
+     * @return true si le numéro est valide selon l'algorithme de Luhn, false sinon.
+     */
+    public static boolean isValidCreditCardNumber(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return false;
+        }
+
+
+        String sanitizedInput = input.replaceAll("\\s|-", "");
+        if (!sanitizedInput.matches("\\d+")) {
+            return false; // Doit contenir uniquement des chiffres
+        }
+
+        int sum = 0;
+        boolean alternate = false;
+
+
+        for (int i = sanitizedInput.length() - 1; i >= 0; i--) {
+            int digit = Character.getNumericValue(sanitizedInput.charAt(i));
+
+            if (alternate) {
+                digit *= 2;
+                if (digit > 9) {
+                    digit -= 9;
+                }
+            }
+
+            sum += digit;
+            alternate = !alternate;
+        }
+
+
+        return sum % 10 == 0;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
