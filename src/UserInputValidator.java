@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public final class UserInputManager {
+public final class UserInputValidator {
 
-    private UserInputManager() {
+    private UserInputValidator() {
         throw new UnsupportedOperationException("Cette classe ne peut pas être instanciée.");
     }
 
