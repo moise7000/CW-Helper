@@ -125,6 +125,3 @@ System.out.println(masked); // Output: "**** **** **** 9012"
 
 Feel free to suggest new validation or formatting methods by creating issues or submitting pull requests.
 
-## License
-
-[Your license information here]
