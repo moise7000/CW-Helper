@@ -84,7 +84,7 @@ public final class UserInputFormatter {
     /**
      * Supprime les accents d'une chaîne de caractères.
      *
-     * @param input La chaîne a transformée.
+     * @param input La chaîne à transformer.
      * @return La chaîne transformée : sans les accents.
      */
     public static String removeAccents(String input) {
@@ -104,6 +104,56 @@ public final class UserInputFormatter {
     public static String formatEmail(String email) {
         return email == null ? "" : email.trim().toLowerCase();
     }
+
+
+    /**
+     * Tronque un texte à une longueur maximale en ajoutant "..." si nécessaire.
+     *
+     * @param text Le texte que l'on va tronquer si nécessaire
+     * @param maxLength La longueur maximale acceptable du texte. On rajoute "..." à la fin de la chaîne.
+     * @return Le texte tronqué (ou non)
+     */
+    public static String truncateText(String text, int maxLength) {
+        if (text == null || text.length() <= maxLength) return text;
+        return text.substring(0, maxLength - 3) + "...";
+    }
+
+
+    /**
+     * Formate un montant avec 2 décimales.
+     *
+     * @param amount Montant décimale à formater.
+     * @return Montant fomarter avec uniquement deux décimales
+     */
+    public static String formatAmount(double amount) {
+        return String.format("%.2f", amount);
+    }
+
+
+    /**
+     * Masque partiellement un numéro de carte de crédit.
+     *
+     * @param creditCard La chaîne de caractères représentant la carte de crédit.
+     * @return La chaîne de caractère partiellement masquée.
+     */
+    public static String maskCreditCard(String creditCard) {
+        if (creditCard == null || creditCard.length() < 4) return "";
+        String cleaned = creditCard.replaceAll("[^0-9]", "");
+        return "**** **** **** " + cleaned.substring(cleaned.length() - 4);
+    }
+
+
+    /**
+     * Formate un prix avec le symbole de la devise.
+     *
+     * @param price Le prix à formater.
+     * @param currency La devise à ajouter.
+     * @return La chaîne de caractère avec le prix et la devise.
+     */
+    public static String formatPrice(double price, String currency) {
+        return String.format("%.2f %s", price, currency);
+    }
+
 
 
 
