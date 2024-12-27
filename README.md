@@ -5,7 +5,7 @@ The main purpose of this repository is to help our team during a coding week pro
 ## Overview
 
 This project contains two main utility classes:
-1. `UserInputValidator` (formerly `UserInputManager`): Centralizes various methods for validating user input
+1. `UserInputValidator`: Centralizes various methods for validating user input
 2. `UserInputFormatter`: Provides formatting and normalization methods for user input
 
 The primary goals of these utilities are:
