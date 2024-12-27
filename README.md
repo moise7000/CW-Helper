@@ -1,127 +1,217 @@
-# Input Utils - InfusingWeek
+# Input & Date Utils - InfusingWeek
 
-The main purpose of this repository is to help our team during a coding week project. This project focuses on user input validation and formatting in Java, providing reusable utility methods to ensure data integrity and avoid runtime errors.
+This repository provides a collection of utility classes for handling user input validation, formatting, and date manipulation in Java. The goal is to ensure robust data handling and consistent formatting across applications while reducing code duplication and potential errors.
 
 ## Overview
 
-This project contains two main utility classes:
-1. `UserInputValidator`: Centralizes various methods for validating user input
-2. `UserInputFormatter`: Provides formatting and normalization methods for user input
+This project contains three main utility classes:
+1. `UserInputValidator`: Methods for input validation
+2. `UserInputFormatter`: Methods for formatting and normalizing user input
+3. `DateUtils`: Methods for date manipulation and validation
 
-The primary goals of these utilities are:
-* Ensure input adheres to specific formats or constraints
-* Standardize data formatting across the application
-* Simplify input validation across multiple parts of a project
-* Provide reusable and extensible validation and formatting logic
+## Table of Contents
+- [Features](#features)
+    - [Input Validation](#input-validation)
+    - [Input Formatting](#input-formatting)
+    - [Date Utilities](#date-utilities)
+- [Installation](#installation)
+- [Usage Examples](#usage-examples)
+- [Best Practices](#best-practices)
 
 ## Features
 
-### Input Validation (`UserInputValidator`)
+### Input Validation
 
-The `UserInputValidator` provides a wide range of validation methods for different types of input, ensuring clean, secure, and robust data processing.
+The `UserInputValidator` class provides methods to ensure data integrity:
 
 #### General Validation
 * `isValidString(String input)`: Verifies that a string is not null or empty
-* `matchesPattern(String input, String regex)`: Checks if a string matches a given regular expression
-* `containsOnly(String input, String allowedChars)`: Ensures a string contains only specified allowed characters
+* `matchesPattern(String input, String regex)`: Tests if a string matches a regex pattern
+* `containsOnly(String input, String allowedChars)`: Ensures a string only contains allowed characters
 
-#### Number Validation
-* `isValidInteger(String input)`: Validates that a string can be converted to a valid integer
-* `isValidDouble(String input)`: Validates that a string can be converted to a valid floating-point number
-* `isPositiveInteger(String input)`: Checks if an integer is strictly greater than zero
-* `isPositiveIntegerOrZero(String input)`: Validates that an integer is greater than or equal to zero
-* `isWithinRange(int value, int min, int max)`: Checks if an integer falls within a specific range (inclusive)
-* `isIntegerGreaterEqualThan(String input, int target)`: Checks if an integer is greater than or equal to a target
-* `isIntegerGreaterThan(String input, int target)`: Checks if an integer is strictly greater than a target
-* `isIntegerLessEqualThan(String input, int target)`: Validates that an integer is less than or equal to a target
-* `isIntegerLessThan(String input, int target)`: Validates that an integer is strictly less than a target
+#### Numeric Validation
+* `isValidInteger(String input)`: Validates integer strings
+* `isValidDouble(String input)`: Validates decimal number strings
+* `isPositiveInteger(String input)`: Checks for positive integers
+* `isPositiveIntegerOrZero(String input)`: Validates non-negative integers
+* `isWithinRange(int value, int min, int max)`: Checks if a number is within bounds
+* `isIntegerGreaterEqualThan(String input, int target)`: Validates minimum values
+* `isIntegerGreaterThan(String input, int target)`: Checks for values above a threshold
+* `isIntegerLessEqualThan(String input, int target)`: Validates maximum values
+* `isIntegerLessThan(String input, int target)`: Checks for values below a threshold
 
 #### String Content Validation
-* `isAlpha(String input)`: Validates that a string contains only alphabetic characters (a-z, A-Z)
-* `isAlphaNumeric(String input)`: Validates that a string contains only alphabetic and numeric characters
-* `hasMinimumLength(String input, int minLength)`: Ensures a string has a minimum length
-* `hasMaximumLength(String input, int maxLength)`: Ensures a string does not exceed a maximum length
+* `isAlpha(String input)`: Validates alphabetic-only strings
+* `isAlphaNumeric(String input)`: Validates alphanumeric strings
+* `hasMinimumLength(String input, int minLength)`: Checks minimum string length
+* `hasMaximumLength(String input, int maxLength)`: Checks maximum string length
+
+#### Format Validation
+* `isValidEmail(String input)`: Validates email addresses
+* `isValidPhoneNumber(String input)`: Validates phone numbers
+* `isValidUrl(String input)`: Validates URLs
+* `isValidPostalCode(String input)`: Validates postal codes
+* `isValidCreditCardNumber(String input)`: Validates credit card numbers using Luhn algorithm
+* `isValidDate(String input, String format)`: Validates date strings
+* `isDateWithinRange(String input, String format, String startDate, String endDate)`: Validates dates within ranges
+
+### Input Formatting
+
+The `UserInputFormatter` class standardizes data presentation:
+
+#### Text Formatting
+* `toUpperCase(String input)`: Converts to uppercase with trimming
+* `toLowerCase(String input)`: Converts to lowercase with trimming
+* `capitalizeWords(String input)`: Capitalizes first letter of each word
+* `getInitials(String fullName)`: Extracts initials from names
+* `removeAccents(String input)`: Removes diacritical marks
+* `truncateText(String text, int maxLength)`: Truncates text with ellipsis
+
+#### Financial Formatting
+* `formatAmount(double amount)`: Formats to two decimal places
+* `formatPrice(double price, String currency)`: Formats with currency symbol
+* `maskCreditCard(String creditCard)`: Masks all but last 4 digits
+
+#### Contact Information
+* `formatEmail(String email)`: Standardizes email format
+
+### Date Utilities
+
+The `DateUtils` class handles date-related operations:
 
 #### Date Validation
-* `isValidDate(String input, String format)`: Validates that a string represents a valid date in a given format
-* `isDateWithinRange(String input, String format, String startDate, String endDate)`: Checks if a date falls within a specified range
+* `isFutureDate(LocalDate date)`: Checks future dates
+* `isPastDate(LocalDate date)`: Validates past dates
+* `isDateInRange(LocalDate date, LocalDate startDate, LocalDate endDate)`: Validates date ranges
+* `isLeapYear(int year)`: Checks leap years
 
-#### Format-Specific Validation
-* `isValidEmail(String input)`: Validates that a string matches a valid email address format
-* `isValidPhoneNumber(String input)`: Validates that a string matches a valid phone number format
-* `isValidUrl(String input)`: Ensures that a string is a valid URL format
-* `isValidPostalCode(String input)`: Validates that a string represents a valid postal code (5-10 digits)
-* `isValidCreditCardNumber(String input)`: Validates a credit card number using the Luhn algorithm
+#### Calendar Operations
+* `calculateAge(LocalDate birthDate)`: Computes age from birth date
+* `isHoliday(LocalDate date)`: Identifies holidays
+* `isWorkingDay(LocalDate date)`: Identifies business days
+* `isWeekend(LocalDate date)`: Checks for weekends
+* `getLastDayOfMonth(LocalDate date)`: Finds month end dates
 
-### Input Formatting (`UserInputFormatter`)
+#### Period Calculations
+* `countWorkingDays(LocalDate startDate, LocalDate endDate)`: Counts business days
+* `periodsOverlap(LocalDate start1, LocalDate end1, LocalDate start2, LocalDate end2)`: Checks period overlaps
+* `getDaysBetween(LocalDate startDate, LocalDate endDate)`: Calculates day intervals
+* `getMonthsBetween(LocalDate startDate, LocalDate endDate)`: Calculates month intervals
 
-The `UserInputFormatter` provides methods for standardizing and normalizing user input. Here are the available formatting methods:
+#### Event Management
+* `generateRecurringDates(LocalDate startDate, LocalDate endDate, int frequencyInDays)`: Generates recurring dates
+* `getNextDayOfWeek(DayOfWeek dayOfWeek)`: Finds next occurrence of weekday
+* `isBirthday(LocalDate birthDate, LocalDate checkDate)`: Validates birthday matches
 
-#### Text Transformation
-* `toUpperCase(String input)`: Converts string to uppercase and removes unnecessary spaces
-* `toLowerCase(String input)`: Converts string to lowercase and removes unnecessary spaces
-* `capitalizeWords(String input)`: Capitalizes the first letter of each word
-* `getInitials(String fullName)`: Extracts initials from a full name
-* `removeAccents(String input)`: Removes diacritical marks from characters
-* `truncateText(String text, int maxLength)`: Truncates text with ellipsis if needed
+#### Date Collections
+* `getMostRecentDate(List<LocalDate> dates)`: Finds latest date
+* `getOldestDate(List<LocalDate> dates)`: Finds earliest date
+* `formatDate(LocalDate date, String pattern)`: Formats dates to strings
 
-#### Financial Data Formatting
-* `formatAmount(double amount)`: Formats decimal numbers with two decimal places
-* `formatPrice(double price, String currency)`: Formats prices with currency symbols
+## Installation
 
-#### Personal Information Formatting
-* `formatEmail(String email)`: Standardizes email addresses to lowercase
-* `maskCreditCard(String creditCard)`: Masks credit card numbers, showing only last 4 digits
+Add the three utility classes to your Java project:
+```java
+src/
+  ├── UserInputValidator.java
+  ├── UserInputFormatter.java
+  └── DateUtils.java
+```
 
-## How to Use
+## Usage Examples
 
-1. Add both utility classes to your Java project
-2. Call the static methods directly without needing to instantiate the classes
-
-### Validation Examples
+### Input Validation
 ```java
 // Email validation
-String email = "example@domain.com";
-boolean isValid = UserInputValidator.isValidEmail(email);
-if (isValid) {
-    System.out.println("Valid email!");
-} else {
-    System.out.println("Invalid email!");
+String email = "user@domain.com";
+if (UserInputValidator.isValidEmail(email)) {
+    System.out.println("Valid email address");
 }
 
-// Number range validation
-int age = 25;
-if (UserInputValidator.isWithinRange(age, 18, 65)) {
-    System.out.println("Age is within valid range!");
+// Number validation
+String age = "25";
+if (UserInputValidator.isValidInteger(age) && 
+    UserInputValidator.isWithinRange(Integer.parseInt(age), 0, 120)) {
+    System.out.println("Valid age");
 }
 ```
 
-### Formatting Examples
+### Input Formatting
 ```java
-// Text formatting
-String fullName = "john david smith";
-String formatted = UserInputFormatter.capitalizeWords(fullName);
-System.out.println(formatted); // Output: "John David Smith"
-
-// Financial formatting
-double price = 42.999;
-String formatted = UserInputFormatter.formatPrice(price, "EUR");
-System.out.println(formatted); // Output: "43.00 EUR"
+// Name formatting
+String name = "john david smith";
+String formatted = UserInputFormatter.capitalizeWords(name);
+System.out.println(formatted); // "John David Smith"
 
 // Credit card masking
-String creditCard = "4532123456789012";
-String masked = UserInputFormatter.maskCreditCard(creditCard);
-System.out.println(masked); // Output: "**** **** **** 9012"
+String cardNumber = "4532123456789012";
+String masked = UserInputFormatter.maskCreditCard(cardNumber);
+System.out.println(masked); // "**** **** **** 9012"
+```
+
+### Date Operations
+```java
+// Age calculation
+LocalDate birthDate = LocalDate.of(1990, 5, 15);
+int age = DateUtils.calculateAge(birthDate);
+System.out.println("Age: " + age);
+
+// Working days in a period
+LocalDate start = LocalDate.now();
+LocalDate end = start.plusMonths(1);
+long workDays = DateUtils.countWorkingDays(start, end);
+System.out.println("Working days: " + workDays);
+
+// Generate weekly dates
+List<LocalDate> weeklyDates = DateUtils.generateRecurringDates(
+    start, 
+    end,
+    7
+);
+weeklyDates.forEach(System.out::println);
+
+// Check date overlaps
+boolean overlaps = DateUtils.periodsOverlap(
+    LocalDate.of(2024, 1, 1),
+    LocalDate.of(2024, 1, 15),
+    LocalDate.of(2024, 1, 10),
+    LocalDate.of(2024, 1, 20)
+);
+System.out.println("Periods overlap: " + overlaps);
 ```
 
 ## Best Practices
 
-1. Always validate input before formatting
-2. Chain validation and formatting methods for complete input processing
-3. Use appropriate error handling when working with nullable inputs
-4. Consider performance implications when processing large amounts of data
+1. Input Validation
+    - Always validate input before processing
+    - Chain multiple validations when needed
+    - Handle null inputs appropriately
+    - Use specific validation methods rather than generic ones
 
-## Contributing
+2. Formatting
+    - Format data only after validation
+    - Consider locale requirements
+    - Handle special characters properly
+    - Be consistent with formatting patterns
 
-Feel free to suggest new validation or formatting methods by creating issues or submitting pull requests.
+3. Date Handling
+    - Use modern `java.time` API
+    - Consider time zones when relevant
+    - Validate date ranges before processing
+    - Account for holidays in business calculations
+    - Handle leap years appropriately
+    - Use date formatting patterns consistently
 
+4. General
+    - Handle exceptions appropriately
+    - Log validation failures when needed
+    - Document custom validation rules
+    - Consider performance with large datasets
+    - Use appropriate error messages
+    - Keep validation rules maintainable
+
+
+
+## License
+
+This project is available under the MIT License. Feel free to use and modify as needed.
