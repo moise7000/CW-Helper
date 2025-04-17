@@ -1,4 +1,4 @@
-# Input & Date Utils - InfusingWeek
+# Input & Date Java Utils
 
 This repository provides a collection of utility classes for handling user input validation, formatting, and date manipulation in Java. The goal is to ensure robust data handling and consistent formatting across applications while reducing code duplication and potential errors.
 
